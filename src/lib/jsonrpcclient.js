@@ -223,6 +223,9 @@ class JsonRpcClient {
         return true;
     };
 
+    /**
+     *
+     */
     closeSocket() {
         if (this.socketReady()) {
             this._ws_socket.onclose = function (w) {
@@ -232,6 +235,10 @@ class JsonRpcClient {
         }
     };
 
+    /**
+     *
+     * @param params
+     */
     loginData(params) {
         this.options.login = params.login;
         this.options.passwd = params.passwd;
@@ -239,6 +246,11 @@ class JsonRpcClient {
         this.options.userVariables = params.userVariables;
     };
 
+    /**
+     *
+     * @param onmessage_cb
+     * @returns {boolean}
+     */
     connectSocket(onmessage_cb) {
         if (this.to) {
             clearTimeout(this.to);

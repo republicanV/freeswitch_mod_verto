@@ -13,7 +13,7 @@ class BatchObject extends JsonRpcClient {
       // Array of objects to hold the call and notify requests.
       // Each objects will have the request
       // object, and unless it is a notify, success_cb and error_cb.
-      this._requests   = [];
+      this._requests = [];
 
       this.jsonrpcclient = new JsonRpcClient();
       this.all_done_cb = all_done_cb;
