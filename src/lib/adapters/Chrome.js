@@ -1,6 +1,6 @@
 import BaseAdapter from './BaseAdapter';
 
-class Chrome extends BaseAdapter {
+class  Chrome extends BaseAdapter {
     constructor(m) {
         super(m);
 

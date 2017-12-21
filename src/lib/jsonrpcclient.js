@@ -1,4 +1,5 @@
 import 'axios';
+import BatchObject from './BatchObject';
 
 /**
  * Json RPC Client class
@@ -26,6 +27,7 @@ class JsonRpcClient {
     constructor(options = {}) {
         this.options = {...this.options, ...options};
         console.log('JsonRpcClient__Options: ', this.options);
+        this._batchObject = new BatchObject();
     }
 
     options = {
@@ -37,7 +39,7 @@ class JsonRpcClient {
         sessid        : null,
         loginParams   : null,
         userVariables : null,
-        getSocket     : function(onmessage_cb) {
+        getSocket     : (onmessage_cb) => {
             return this._getSocket(onmessage_cb);
         }
     };
@@ -174,7 +176,7 @@ class JsonRpcClient {
 
         // No WebSocket, and no HTTP backend?  This won't work.
         if (this.options.ajaxUrl === null) {
-            throw "$.JsonRpcClient.notify used with no websocket and no http endpoint.";
+            throw "JsonRpcClient.notify used with no websocket and no http endpoint.";
         }
 
         axios.post(this.options.ajaxUrl, {
@@ -185,7 +187,7 @@ class JsonRpcClient {
     /**
      * Make a batch-call by using a callback.
      *
-     * The callback will get an object "batch" as only argument.  On batch, you can call the methods
+     * The callback will get an object "batch" as only argument. On batch, you can call the methods
      * "call" and "notify" just as if it was a normal JsonRpcClient object, and all calls will be
      * sent as a batch call then the callback is done.
      *
@@ -200,7 +202,7 @@ class JsonRpcClient {
      */
 
     batch(callback, all_done_cb, error_cb) {
-        const batch = new JsonRpcClient._batchObject(this, all_done_cb, error_cb);
+        const batch = new this._batchObject(this, all_done_cb, error_cb);
         callback(batch);
         batch._execute();
     };
@@ -501,17 +503,6 @@ class JsonRpcClient {
             }
         }
     };
-
-    /************************************************************************************************
-     * Batch object with methods
-     ************************************************************************************************/
-
-    /**
-     * Handling object for batch calls.
-     */
-
-
-
 }
 
 export default JsonRpcClient;

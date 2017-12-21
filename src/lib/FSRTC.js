@@ -2,6 +2,7 @@ import ErrorFSRTC from './errors/ErrorFSRT';
 import Adapters from './adapters';
 import {CHROME, FIREFOX, ANDROID, IE, IOS, OPERA, SAFARI} from './constants/browserName'
 // import 'verto';
+
 /**
  * FREESWITCH RTC Class
  */
@@ -203,7 +204,9 @@ class FSRTC {
 
         if (fmtpLineIndex === null) {
             // create an fmtp line
-            sdpLines[opusIndex] = sdpLines[opusIndex] + '\r\na=fmtp:' + opusPayload.toString() + " stereo=1; sprop-stereo=1"
+            sdpLines[opusIndex] = sdpLines[opusIndex] +
+                '\r\na=fmtp:' + opusPayload.toString() +
+                " stereo=1; sprop-stereo=1"
         } else {
             // Append stereo=1 to fmtp line.
             sdpLines[fmtpLineIndex] = sdpLines[fmtpLineIndex].concat('; stereo=1; sprop-stereo=1');
@@ -613,7 +616,7 @@ class FSRTC {
                 }
             }
 
-            this.peer = RTCPeerConnection({
+            this.peer = this.RTCPeerConnection({
                 type: this.type,
                 attachStream: this.localStream,
                 onICE: function(candidate) {
@@ -742,7 +745,13 @@ class FSRTC {
             }
 
             if (options.type === "offer") {
-                if ((!this.moz || (!options.sentICESDP && peer.localDescription.sdp.match(/a=candidate/)) && !x && options.onICESDP)) {
+                if ((
+                        !this.moz ||
+                        (
+                            !options.sentICESDP &&
+                            peer.localDescription.sdp.match(/a=candidate/)
+                        ) && !x && options.onICESDP
+                    )) {
                     options.onICESDP(peer.localDescription);
                     //x = 1;
                     /*
