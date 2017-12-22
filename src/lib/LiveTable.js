@@ -167,27 +167,7 @@ class LiveTable extends LiveArray {
 
         return data;
     };
-
-    liveTable = function(verto, context, name, jq, config) {
-        // var dt;
-        // var la = new $.verto.liveArray(verto, context, name, {
-        //     subParams: config.subParams
-        // });
-        // var lt = this;
-
-        // lt.liveArray = la;
-        // lt.dataTable = dt;
-        // lt.verto = verto;
-
-
-
-        // la.onErr = function(obj, args) {
-        //     console.error("Error: ", obj, args);
-        // };
-
-        /* back compat so jsonstatus can always be enabled */
-
-    };
+    
 }
 
 export default LiveTable;
