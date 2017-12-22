@@ -309,7 +309,7 @@ class Verto {
      * @param method
      * @param params
      */
-    sendMethod(method, params) {
+    static sendMethod(method, params) {
         //var verto = this;
         this.rpcClient.call(method, params,
 
@@ -581,6 +581,11 @@ class Verto {
         return dialog;
     };
 
+    /**
+     *
+     * @param data
+     * @returns {{method}}
+     */
     handleMessage(data) {
         // var verto = this;
 
@@ -726,6 +731,37 @@ class Verto {
         }
     };
 
+    /**
+     *
+     * @param array
+     * @param name
+     * @returns {Array}
+     */
+    del_array = (array, name) => {
+        let r = [];
+        let len = array.length;
+
+        for (let i = 0; i < len; i++) {
+            if (array[i] !== name) {
+                r.push(array[i]);
+            }
+        }
+
+        return r;
+    };
+
+    /**
+     *
+     * @type {number}
+     */
+    CONFMAN_SERNO = 1;
+
+    /**
+     *
+     * @param s
+     * @returns {Readonly<{}>}
+     * @constructor
+     */
     ENUM(s) {
         let i = 0,
             o = {};
@@ -866,7 +902,7 @@ class Verto {
      * @param obj
      * @param runtime
      */
-    init(obj, runtime) {
+    static init(obj, runtime) {
         if (!obj) {
             obj = {};
         }
