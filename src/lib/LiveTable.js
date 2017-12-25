@@ -167,7 +167,7 @@ class LiveTable extends LiveArray {
 
         return data;
     };
-    
+
 }
 
 export default LiveTable;

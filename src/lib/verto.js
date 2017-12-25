@@ -409,7 +409,7 @@ class Verto {
      * @param sparams
      * @returns {Array}
      */
-    subscribe(channel, sparams) {
+    static subscribe(channel, sparams) {
         //var verto = this;
         let r = [];
         let subChannels = [];
